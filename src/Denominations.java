@@ -251,5 +251,4 @@ public class Denominations {
         setP500Bill(0);
         setP1000Bill(0);
     }
-
 }

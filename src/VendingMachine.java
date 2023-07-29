@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static java.lang.Math.abs;
+
 /**
  * Represents a vending machine.
  * Contains objects of Item, ItemSlot, Denominations, and Transaction classes and corresponding
@@ -315,6 +317,7 @@ public class VendingMachine {
         payment = paymentDenominations.computeTotal(paymentDenominations);
         vendingMachine.displayItems(vendingMachine);
         ArrayList<ItemSlot> slots = vendingMachine.getItemSlots();
+        vendingMachine.computeMoneyInMachine(vendingMachine.getDenominations(), vendingMachine);
 
         System.out.println("Enter name of item to purchase: ");
         String itemName = sc.nextLine();
@@ -322,14 +325,94 @@ public class VendingMachine {
         for (ItemSlot i : slots) {
             if (itemName.equals(i.getItem().getName())) {
                 found = true;
-                double change = i.getItem().getPrice() - payment;
-                if (change > vendingMachine.getMoneyInMachine()) {
+                boolean validPurchase = false;
+                double change = abs(i.getItem().getPrice() - payment);
+                System.out.println("change value" +change);
+                System.out.println("total:" +vendingMachine.moneyInMachine);
+
+                // Checks if inserted payment is enough
+                if (payment < i.getItem().getPrice()) {
+                    System.out.println("Insufficient amount inserted.");
+                    System.out.println("Returned money: " +payment);
+                }
+
+                // Checks if there is enough money in the machine to dispense change
+                else if (change > vendingMachine.getMoneyInMachine()) {
                     System.out.println("Not enough money in machine to dispense change.");
                     System.out.println("Contact maintenance to replenish money.");
-                } else if (payment < i.getItem().getPrice()) {
-                    System.out.println("Insufficient amount inserted."); }
+                    System.out.println("Returned money: " +payment);
+                }
+
+                // Checks if the selected item is in stock
+                else if (i.getQuantity() == 0) {
+                    System.out.println("Item out of stock.");
+                    System.out.println("Returned money: " +payment);
+                }
+
                 else {
-                    System.out.println("Item purchased successfully!");
+                    validPurchase = true;
+                }
+
+                // Logic for change denomination goes here
+                int changeHolder = (int) change;
+                Denominations denominationsChange = new Denominations();
+
+                if (changeHolder / 1000 > 1){
+                    int quotient = changeHolder / 1000;
+                    changeHolder = changeHolder - (1000 * quotient);
+                    denominationsChange.setP1000Bill(quotient);
+                }
+
+                if (changeHolder / 500 > 1){
+                    int quotient = changeHolder / 500;
+                    changeHolder = changeHolder - (500 * quotient);
+                    denominationsChange.setP500Bill(quotient);
+                }
+
+                if (changeHolder / 200 > 1){
+                    int quotient = changeHolder / 200;
+                    changeHolder = changeHolder - (200 * quotient);
+                    denominationsChange.setP200Bill(quotient);
+                }
+
+                if (changeHolder / 100 > 1){
+                    int quotient = changeHolder / 100;
+                    changeHolder = changeHolder - (100 * quotient);
+                    denominationsChange.setP100Bill(quotient);
+                }
+
+                if (changeHolder / 50 > 1){
+                    int quotient = changeHolder / 50;
+                    changeHolder = changeHolder - (50 * quotient);
+                    denominationsChange.setP50Bill(quotient);
+                }
+
+                //TODO: IMPLEMENT LOGIC FOR P20 BILLS VS COINS
+
+                if (changeHolder / 20 > 1){
+                    int quotient = changeHolder / 20;
+                    changeHolder = changeHolder - (20 * quotient);
+                    denominationsChange.setP20Bill(quotient);
+                }
+
+                if (changeHolder / 10 > 1){
+                    int quotient = changeHolder / 10;
+                    changeHolder = changeHolder - (10 * quotient);
+                    denominationsChange.setP10Coin(quotient);
+                }
+
+                if (changeHolder / 1 > 1){
+                    int quotient = changeHolder / 1;
+                    changeHolder = changeHolder - (1 * quotient);
+                    denominationsChange.setP1Coin(quotient);
+                }
+
+                if (validPurchase == true) {
+                    System.out.println("Purchase successful!");
+                    System.out.println("Item purchased: " + i.getItem().getName());
+                    System.out.println("Total change dispensed: " + change);
+
+
                     Transaction transaction = new Transaction();
                     transaction.setItemSold(i.getItem());
                     transaction.setPayment(payment);
@@ -343,7 +426,6 @@ public class VendingMachine {
                     vendingMachine.getTransactionLog().add(transaction);
                     vendingMachine.setTotalSales(vendingMachine.getTotalSales() + vendingMachine.getItemSlots().get(index).getItem().getPrice());
                 }
-
             }
 
         }
@@ -426,7 +508,6 @@ public class VendingMachine {
             System.out.println("Item not found.");
         }
     }
-
 
     /**
      * Sets the price of an item in the vending machine.
