@@ -150,7 +150,7 @@ public class VendingMachine {
         System.out.println("==========ITEMS IN VENDING MACHINE==========");
         System.out.println("NAME    PRICE    CALORIES    QUANTITY");
         for (ItemSlot i: items){
-            System.out.println(i.getItem().getName() +"     "+ i.getItem().getPrice() +"        "+ i.getItem().getCalories()+"      "+i.getQuantity());
+            System.out.println(i.getItem().getName() +"     "+ i.getItem().getPrice() +"        "+ i.getItem().getCalories()+"      "+i.getQuantity()+"/"+i.getCapacity());
         }
     }
 
@@ -325,7 +325,7 @@ public class VendingMachine {
         for (ItemSlot i : slots) {
             if (itemName.equals(i.getItem().getName())) {
                 found = true;
-                boolean validPurchase = false;
+                boolean validPurchase = true;
                 double change = abs(i.getItem().getPrice() - payment);
                 System.out.println("change value" +change);
                 System.out.println("total:" +vendingMachine.moneyInMachine);
@@ -349,10 +349,6 @@ public class VendingMachine {
                     System.out.println("Returned money: " +payment);
                 }
 
-                else {
-                    validPurchase = true;
-                }
-
                 // Logic for change denomination goes here
                 int changeHolder = (int) change;
                 Denominations denominationsChange = new Denominations();
@@ -361,30 +357,45 @@ public class VendingMachine {
                     int quotient = changeHolder / 1000;
                     changeHolder = changeHolder - (1000 * quotient);
                     denominationsChange.setP1000Bill(quotient);
+                    if (denominationsChange.getP1000Bill() > vendingMachine.getDenominations().getP1000Bill()){
+                        validPurchase = false;
+                    }
                 }
 
                 if (changeHolder / 500 > 1){
                     int quotient = changeHolder / 500;
                     changeHolder = changeHolder - (500 * quotient);
                     denominationsChange.setP500Bill(quotient);
+                    if (denominationsChange.getP500Bill() > vendingMachine.getDenominations().getP500Bill()){
+                        validPurchase = false;
+                    }
                 }
 
                 if (changeHolder / 200 > 1){
                     int quotient = changeHolder / 200;
                     changeHolder = changeHolder - (200 * quotient);
                     denominationsChange.setP200Bill(quotient);
+                    if (denominationsChange.getP200Bill() > vendingMachine.getDenominations().getP200Bill()){
+                        validPurchase = false;
+                    }
                 }
 
                 if (changeHolder / 100 > 1){
                     int quotient = changeHolder / 100;
                     changeHolder = changeHolder - (100 * quotient);
                     denominationsChange.setP100Bill(quotient);
+                    if (denominationsChange.getP100Bill() > vendingMachine.getDenominations().getP100Bill()){
+                        validPurchase = false;
+                    }
                 }
 
                 if (changeHolder / 50 > 1){
                     int quotient = changeHolder / 50;
                     changeHolder = changeHolder - (50 * quotient);
                     denominationsChange.setP50Bill(quotient);
+                    if (denominationsChange.getP50Bill() > vendingMachine.getDenominations().getP50Bill()){
+                        validPurchase = false;
+                    }
                 }
 
                 //TODO: IMPLEMENT LOGIC FOR P20 BILLS VS COINS
@@ -393,26 +404,124 @@ public class VendingMachine {
                     int quotient = changeHolder / 20;
                     changeHolder = changeHolder - (20 * quotient);
                     denominationsChange.setP20Bill(quotient);
+                    if (denominationsChange.getP20Bill() > vendingMachine.getDenominations().getP20Bill()){
+                        validPurchase = false;
+                    }
                 }
 
                 if (changeHolder / 10 > 1){
                     int quotient = changeHolder / 10;
                     changeHolder = changeHolder - (10 * quotient);
                     denominationsChange.setP10Coin(quotient);
+                    if (denominationsChange.getP10Coin() > vendingMachine.getDenominations().getP10Coin()){
+                        validPurchase = false;
+                    }
+                }
+
+                if (changeHolder / 5 > 1){
+                    int quotient = changeHolder / 5;
+                    changeHolder = changeHolder - (5 * quotient);
+                    denominationsChange.setP5Coin(quotient);
+                    if (denominationsChange.getP5Coin() > vendingMachine.getDenominations().getP5Coin()){
+                        validPurchase = false;
+                    }
                 }
 
                 if (changeHolder / 1 > 1){
                     int quotient = changeHolder / 1;
                     changeHolder = changeHolder - (1 * quotient);
                     denominationsChange.setP1Coin(quotient);
+                    if (denominationsChange.getP1Coin() > vendingMachine.getDenominations().getP1Coin()){
+                        validPurchase = false;
+                    }
                 }
 
+                // Checks if the machine has enough denominations stored to dispense change
+                /*
+                if (denominationsChange.getP1000Bill() > vendingMachine.getDenominations().getP1000Bill()){
+                    validPurchase = false;
+                }
+
+                if (denominationsChange.getP500Bill() > vendingMachine.getDenominations().getP500Bill()){
+                    validPurchase = false;
+                }
+
+                if (denominationsChange.getP200Bill() > vendingMachine.getDenominations().getP200Bill()){
+                    validPurchase = false;
+                }
+
+                if (denominationsChange.getP100Bill() > vendingMachine.getDenominations().getP100Bill()){
+                    validPurchase = false;
+                }
+
+                if (denominationsChange.getP50Bill() > vendingMachine.getDenominations().getP50Bill()){
+                    validPurchase = false;
+                }
+
+                if (denominationsChange.getP20Bill() > vendingMachine.getDenominations().getP20Bill()){
+                    validPurchase = false;
+                }
+
+                if (denominationsChange.getP20Coin() > vendingMachine.getDenominations().getP20Coin()){
+                    validPurchase = false;
+                }
+
+                if (denominationsChange.getP10Coin() > vendingMachine.getDenominations().getP10Coin()){
+                    validPurchase = false;
+                }
+
+                if (denominationsChange.getP1Coin() > vendingMachine.getDenominations().getP1Coin()){
+                    validPurchase = false;
+                }
+*/
+
+
                 if (validPurchase == true) {
-                    System.out.println("Purchase successful!");
+                    System.out.println("\nPurchase successful!");
                     System.out.println("Item purchased: " + i.getItem().getName());
-                    System.out.println("Total change dispensed: " + change);
+                    System.out.println("Change dispensed: ");
 
+                    //TODO: DISPLAY CHANGE IN DIFFERENT DENOMINATIONS
 
+                    if (denominationsChange.getP1000Bill() > 0){
+                        System.out.println(denominationsChange.getP1000Bill()+ " P1000 Bills");
+                    }
+
+                    if (denominationsChange.getP500Bill() > 0){
+                        System.out.println(denominationsChange.getP500Bill()+ " P500 Bills");
+                    }
+
+                    if (denominationsChange.getP200Bill() > 0){
+                        System.out.println(denominationsChange.getP200Bill()+ " P200 Bills");
+                    }
+
+                    if (denominationsChange.getP100Bill() > 0){
+                        System.out.println(denominationsChange.getP100Bill()+ " P100 Bills");
+                    }
+
+                    if (denominationsChange.getP50Bill() > 0){
+                        System.out.println(denominationsChange.getP50Bill()+ " P50 Bills");
+                    }
+
+                    if (denominationsChange.getP20Bill() > 0){
+                        System.out.println(denominationsChange.getP20Bill()+ " P20 Bills");
+                    }
+
+                    if (denominationsChange.getP10Coin() > 0){
+                        System.out.println(denominationsChange.getP10Coin()+ " P10 Coins");
+                    }
+
+                    if (denominationsChange.getP5Coin() > 0){
+                        System.out.println(denominationsChange.getP5Coin()+ " P5 Coins");
+                    }
+
+                    if (denominationsChange.getP1Coin() > 0){
+                        System.out.println(denominationsChange.getP1Coin()+ " P1 Coins");
+                    }
+
+                    System.out.println("Total: " +change);
+
+                    // Creates new transaction
                     Transaction transaction = new Transaction();
                     transaction.setItemSold(i.getItem());
                     transaction.setPayment(payment);
@@ -421,10 +530,29 @@ public class VendingMachine {
 
                     int index = slots.indexOf(i);
 
+                    // Updates item quantity
                     vendingMachine.getItemSlots().get(index).setQuantity(vendingMachine.getItemSlots().get(index).getQuantity() - 1);
+
+                    // Updates sales log
                     vendingMachine.getItemSlots().get(index).setSales(vendingMachine.getItemSlots().get(index).getSales() + 1);
+
+                    // Adds transaction to list of transactions
                     vendingMachine.getTransactionLog().add(transaction);
+
+                    // Updates total sales
                     vendingMachine.setTotalSales(vendingMachine.getTotalSales() + vendingMachine.getItemSlots().get(index).getItem().getPrice());
+
+                    // Updates denominations
+                    vendingMachine.getDenominations().setP1000Bill(vendingMachine.getDenominations().getP1000Bill() - denominationsChange.getP1000Bill());
+                    vendingMachine.getDenominations().setP500Bill(vendingMachine.getDenominations().getP500Bill() - denominationsChange.getP500Bill());
+                    vendingMachine.getDenominations().setP200Bill(vendingMachine.getDenominations().getP200Bill() - denominationsChange.getP200Bill());
+                    vendingMachine.getDenominations().setP100Bill(vendingMachine.getDenominations().getP100Bill() - denominationsChange.getP100Bill());
+                    vendingMachine.getDenominations().setP50Bill(vendingMachine.getDenominations().getP50Bill() - denominationsChange.getP50Bill());
+                    vendingMachine.getDenominations().setP20Bill(vendingMachine.getDenominations().getP20Bill() - denominationsChange.getP20Bill());
+                    vendingMachine.getDenominations().setP20Coin(vendingMachine.getDenominations().getP20Coin() - denominationsChange.getP20Coin());
+                    vendingMachine.getDenominations().setP10Coin(vendingMachine.getDenominations().getP10Coin() - denominationsChange.getP10Coin());
+                    vendingMachine.getDenominations().setP5Coin(vendingMachine.getDenominations().getP5Coin() - denominationsChange.getP5Coin());
+                    vendingMachine.getDenominations().setP1Coin(vendingMachine.getDenominations().getP1Coin() - denominationsChange.getP1Coin());
                 }
             }
 
@@ -743,5 +871,20 @@ public void displayTotalSales(VendingMachine vendingMachine){
         }
     }
 
+    public void displayDenominations(VendingMachine vendingMachine) {
+        Denominations denominations = vendingMachine.getDenominations();
+
+        System.out.println("Current money in machine:");
+        System.out.println(denominations.getP1000Bill() +" P1000 Bills");
+        System.out.println(denominations.getP500Bill() +" P500 Bills");
+        System.out.println(denominations.getP200Bill() +" P200 Bills");
+        System.out.println(denominations.getP100Bill() +" P100 Bills");
+        System.out.println(denominations.getP50Bill() +" P50 Bills");
+        System.out.println(denominations.getP20Bill() +" P20 Bills");
+        System.out.println(denominations.getP20Coin() +" P20 Coins");
+        System.out.println(denominations.getP10Coin() +" P10 Coins");
+        System.out.println(denominations.getP5Coin() +" P5 Coins");
+        System.out.println(denominations.getP1Coin() +" P1 Coins");
+    }
 
 }
