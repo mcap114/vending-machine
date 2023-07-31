@@ -158,7 +158,7 @@ public class VendingMachine {
      * Allows the user to purchase items from the vending machine.
      * Contains logic for calculating change and updating corresponding object attributes.
      *
-     * @param vendingMachine
+     * @param vendingMachine - the currently active vending machine object
      */
     public void purchaseItem(VendingMachine vendingMachine) {
 
@@ -188,131 +188,119 @@ public class VendingMachine {
 
 
             switch (choice) {
-                case 1:
+                case 1 -> {
                     System.out.println("Enter how many 1 Peso Coins to insert: ");
                     quantityInserted = sc.nextInt();
                     sc.nextLine();
-
                     if (quantityInserted > 0) {
                         paymentDenominations.setP1Coin(quantityInserted);
                         System.out.println("Successfully inserted! Current total: " + paymentDenominations.computeTotal(paymentDenominations));
                     } else {
                         System.out.println("Invalid amount entered.");
                     }
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     System.out.println("Enter how many 5 Peso Coins to insert: ");
                     quantityInserted = sc.nextInt();
                     sc.nextLine();
-
                     if (quantityInserted > 0) {
                         paymentDenominations.setP5Coin(quantityInserted);
                         System.out.println("Successfully inserted! Current total: " + paymentDenominations.computeTotal(paymentDenominations));
                     } else {
                         System.out.println("Invalid amount entered.");
                     }
-                    break;
-                case 3:
+                }
+                case 3 -> {
                     System.out.println("Enter how many 10 Peso Coins to insert: ");
                     quantityInserted = sc.nextInt();
                     sc.nextLine();
-
                     if (quantityInserted > 0) {
                         paymentDenominations.setP10Coin(quantityInserted);
                         System.out.println("Successfully inserted! Current total: " + paymentDenominations.computeTotal(paymentDenominations));
                     } else {
                         System.out.println("Invalid amount entered.");
                     }
-                    break;
-                case 4:
+                }
+                case 4 -> {
                     System.out.println("Enter how many 20 Peso Coins to insert: ");
                     quantityInserted = sc.nextInt();
                     sc.nextLine();
-
                     if (quantityInserted > 0) {
                         paymentDenominations.setP20Coin(quantityInserted);
                         System.out.println("Successfully inserted! Current total: " + paymentDenominations.computeTotal(paymentDenominations));
                     } else {
                         System.out.println("Invalid amount entered.");
                     }
-                    break;
-                case 5:
+                }
+                case 5 -> {
                     System.out.println("Enter how many 20 Peso Bills to insert: ");
                     quantityInserted = sc.nextInt();
                     sc.nextLine();
-
                     if (quantityInserted > 0) {
                         paymentDenominations.setP20Bill(quantityInserted);
                         System.out.println("Successfully inserted! Current total: " + paymentDenominations.computeTotal(paymentDenominations));
                     } else {
                         System.out.println("Invalid amount entered.");
                     }
-                    break;
-                case 6:
+                }
+                case 6 -> {
                     System.out.println("Enter how many 50 Peso Bills to insert: ");
                     quantityInserted = sc.nextInt();
                     sc.nextLine();
-
                     if (quantityInserted > 0) {
                         paymentDenominations.setP50Bill(quantityInserted);
                         System.out.println("Successfully inserted! Current total: " + paymentDenominations.computeTotal(paymentDenominations));
                     } else {
                         System.out.println("Invalid amount entered.");
                     }
-                    break;
-                case 7:
+                }
+                case 7 -> {
                     System.out.println("Enter how many 100 Peso Bills to insert: ");
                     quantityInserted = sc.nextInt();
                     sc.nextLine();
-
                     if (quantityInserted > 0) {
                         paymentDenominations.setP100Bill(quantityInserted);
                         System.out.println("Successfully inserted! Current total: " + paymentDenominations.computeTotal(paymentDenominations));
                     } else {
                         System.out.println("Invalid amount entered.");
                     }
-                    break;
-                case 8:
+                }
+                case 8 -> {
                     System.out.println("Enter how many 200 Peso Bills to insert: ");
                     quantityInserted = sc.nextInt();
                     sc.nextLine();
-
                     if (quantityInserted > 0) {
                         paymentDenominations.setP200Bill(quantityInserted);
                         System.out.println("Successfully inserted! Current total: " + paymentDenominations.computeTotal(paymentDenominations));
                     } else {
                         System.out.println("Invalid amount entered.");
                     }
-                    break;
-                case 9:
+                }
+                case 9 -> {
                     System.out.println("Enter how many 500 Peso Bills to insert: ");
                     quantityInserted = sc.nextInt();
                     sc.nextLine();
-
                     if (quantityInserted > 0) {
                         paymentDenominations.setP500Bill(quantityInserted);
                         System.out.println("Successfully inserted! Current total: " + paymentDenominations.computeTotal(paymentDenominations));
                     } else {
                         System.out.println("Invalid amount entered.");
                     }
-                    break;
-                case 10:
+                }
+                case 10 -> {
                     System.out.println("Enter how many 1000 Peso Bills to insert: ");
                     quantityInserted = sc.nextInt();
                     sc.nextLine();
-
                     if (quantityInserted > 0) {
                         paymentDenominations.setP1000Bill(quantityInserted);
                         System.out.println("Successfully inserted! Current total: " + paymentDenominations.computeTotal(paymentDenominations));
                     } else {
                         System.out.println("Invalid amount entered.");
                     }
-                    break;
-                case 11:
-                    exit = true;
-                    break;
+                }
+                case 11 -> exit = true;
             }
-        } while (exit == false);
+        } while (!exit);
 
         payment = paymentDenominations.computeTotal(paymentDenominations);
         vendingMachine.displayItems(vendingMachine);

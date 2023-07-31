@@ -15,7 +15,7 @@ public class Main {
 
         do {
             boolean exit = false;
-            if (specialActive == false) {
+            if (!specialActive) {
                 do {
                     System.out.println("\nVENDING MACHINE FACTORY");
                     System.out.println("1. CREATE REGULAR VENDING MACHINE");
@@ -28,7 +28,7 @@ public class Main {
                     switch (choice) {
 
                         // CREATE REGULAR VENDING MACHINE
-                        case 1:
+                        case 1 -> {
                             System.out.println("Input number of item slots: ");
                             slots = sc.nextInt();
                             sc.nextLine();
@@ -41,10 +41,10 @@ public class Main {
                                 exit = true;
                             }
                             System.out.println("New regular vending machine created!");
-                            break;
+                        }
 
                         // CREATE SPECIAL VENDING MACHINE
-                        case 2:
+                        case 2 -> {
                             System.out.println("Input number of item slots: ");
                             slots = sc.nextInt();
                             sc.nextLine();
@@ -58,10 +58,10 @@ public class Main {
 
                             }
                             System.out.println("New special vending machine created!");
-                            break;
+                        }
 
                         // TEST FEATURES
-                        case 3:
+                        case 3 -> {
                             if (vendingMachine == null) {
                                 System.out.println("No vending machine created yet!");
                             } else {
@@ -180,21 +180,19 @@ public class Main {
 
                                 }
                             }
-                            break;
-
-
-                        case 4:
+                        }
+                        case 4 -> {
                             exitAll = true;
                             sc.close();
                             System.out.println("\nExiting program..");
-                            break;
+                        }
                     }
 
 
-                } while (exit == false);
+                } while (!exit);
             }
 
-            if (specialActive == true) {
+            if (specialActive) {
                 do {
                     System.out.println("\nVENDING MACHINE FACTORY");
                     System.out.println("1. CREATE REGULAR VENDING MACHINE");
@@ -207,7 +205,7 @@ public class Main {
                     switch (choice) {
 
                         // CREATE REGULAR VENDING MACHINE
-                        case 1:
+                        case 1 -> {
                             System.out.println("Input number of item slots: ");
                             slots = sc.nextInt();
                             sc.nextLine();
@@ -219,10 +217,10 @@ public class Main {
                                 exit = true;
                             }
                             System.out.println("New regular vending machine created!");
-                            break;
+                        }
 
                         // CREATE SPECIAL VENDING MACHINE
-                        case 2:
+                        case 2 -> {
                             System.out.println("Input number of item slots: ");
                             slots = sc.nextInt();
                             sc.nextLine();
@@ -234,10 +232,10 @@ public class Main {
                                 exit = true;
                             }
                             System.out.println("New special vending machine created!");
-                            break;
+                        }
 
                         // TEST FEATURES
-                        case 3:
+                        case 3 -> {
                             if (vendingMachineSC == null) {
                                 System.out.println("No vending machine created yet!");
                             } else {
@@ -275,9 +273,9 @@ public class Main {
                                                 System.out.println("ahaha goods nagana pre");
                                                 vendingMachineSC.customizeOrder(vendingMachineSC);
                                                 break;
-                                                //TODO: IMPLEMENT SPECIAL VENDING MACHINE PURCHASE ITEM
-                                                //IF THIS OPTION IS SELECTED WITH A REGULAR VENDING MACHINE ACTIVE,
-                                                //DISPLAY ERROR MESSAGE "THIS OPTION IS ONLY FOR SPECIAL VENDING ETC"
+                                            //TODO: IMPLEMENT SPECIAL VENDING MACHINE PURCHASE ITEM
+                                            //IF THIS OPTION IS SELECTED WITH A REGULAR VENDING MACHINE ACTIVE,
+                                            //DISPLAY ERROR MESSAGE "THIS OPTION IS ONLY FOR SPECIAL VENDING ETC"
                                             case 4:
                                                 break;
                                         }
@@ -357,19 +355,17 @@ public class Main {
 
                                 }
                             }
-                            break;
-
-
-                        case 4:
+                        }
+                        case 4 -> {
                             exitAll = true;
                             sc.close();
                             System.out.println("\nExiting program..");
-                            break;
+                        }
                     }
 
 
-                } while (exit == false);
+                } while (!exit);
             }
-        } while (exitAll == false);
+        } while (!exitAll);
         }
     }
