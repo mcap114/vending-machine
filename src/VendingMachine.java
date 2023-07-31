@@ -341,7 +341,7 @@ public class VendingMachine {
                 int changeHolder = (int) change;
                 Denominations denominationsChange = new Denominations();
 
-                if (changeHolder / 1000 > 1){
+                if (changeHolder / 1000 >= 1){
                     if (vendingMachine.getDenominations().getP1000Bill() != 0) // Initial check, skips to next denomination if this one is empty
                     {
                         int quotient = changeHolder / 1000; // Variable quotient stores how many of this denomination is needed for the current amount of changeHolder
@@ -356,7 +356,7 @@ public class VendingMachine {
                     }
                 }
 
-                if (changeHolder / 500 > 1){
+                if (changeHolder / 500 >= 1){
                     if (vendingMachine.getDenominations().getP500Bill() != 0) // Initial check, skips to next denomination if this one is empty
                     {
                         int quotient = changeHolder / 500; // Variable quotient stores how many of this denomination is needed for the current amount of changeHolder
@@ -371,7 +371,7 @@ public class VendingMachine {
                     }
                 }
 
-                if (changeHolder / 200 > 1){
+                if (changeHolder / 200 >= 1){
                     if (vendingMachine.getDenominations().getP200Bill() != 0) // Initial check, skips to next denomination if this one is empty
                     {
                         int quotient = changeHolder / 200; // Variable quotient stores how many of this denomination is needed for the current amount of changeHolder
@@ -386,7 +386,7 @@ public class VendingMachine {
                     }
                 }
 
-                if (changeHolder / 100 > 1){
+                if (changeHolder / 100 >= 1){
                     if (vendingMachine.getDenominations().getP100Bill() != 0) // Initial check, skips to next denomination if this one is empty
                     {
                         int quotient = changeHolder / 100; // Variable quotient stores how many of this denomination is needed for the current amount of changeHolder
@@ -401,7 +401,7 @@ public class VendingMachine {
                     }
                 }
 
-                if (changeHolder / 50 > 1){
+                if (changeHolder / 50 >= 1){
                     if (vendingMachine.getDenominations().getP50Bill() != 0) // Initial check, skips to next denomination if this one is empty
                     {
                         int quotient = changeHolder / 50; // Variable quotient stores how many of this denomination is needed for the current amount of changeHolder
@@ -416,9 +416,8 @@ public class VendingMachine {
                     }
                 }
 
-                //TODO: IMPLEMENT LOGIC FOR P20 BILLS VS COINS
 
-                if (changeHolder / 20 > 1){
+                if (changeHolder / 20 >= 1){
                     if (vendingMachine.getDenominations().getP20Bill() != 0) // Initial check, skips to next denomination if this one is empty
                     {
                         int quotient = changeHolder / 20; // Variable quotient stores how many of this denomination is needed for the current amount of changeHolder
@@ -433,7 +432,22 @@ public class VendingMachine {
                     }
                 }
 
-                if (changeHolder / 10 > 1){
+                if (changeHolder / 20 >= 1){
+                    if (vendingMachine.getDenominations().getP20Coin() != 0) // Initial check, skips to next denomination if this one is empty
+                    {
+                        int quotient = changeHolder / 20; // Variable quotient stores how many of this denomination is needed for the current amount of changeHolder
+                        denominationsChange.setP20Coin(quotient);
+                        if (denominationsChange.getP20Coin() > vendingMachine.getDenominations().getP20Coin()) // Checks if the vending machine has enough of this denomination stored to dispense amount
+                        {
+                            validPurchase = false;
+                        } else {
+                            validPurchase = true;
+                            changeHolder = changeHolder - (20 * quotient); //Updates the value of changeHolder to compute for the next denomination
+                        }
+                    }
+                }
+
+                if (changeHolder / 10 >= 1){
                     if (vendingMachine.getDenominations().getP10Coin() != 0) // Initial check, skips to next denomination if this one is empty
                     {
                         int quotient = changeHolder / 10; // Variable quotient stores how many of this denomination is needed for the current amount of changeHolder
@@ -448,7 +462,7 @@ public class VendingMachine {
                     }
                 }
 
-                if (changeHolder / 5 > 1){
+                if (changeHolder / 5 >= 1){
                     if (vendingMachine.getDenominations().getP5Coin() != 0) // Initial check, skips to next denomination if this one is empty
                     {
                         int quotient = changeHolder / 5; // Variable quotient stores how many of this denomination is needed for the current amount of changeHolder
@@ -463,7 +477,7 @@ public class VendingMachine {
                     }
                 }
 
-                if (changeHolder / 1 > 1){
+                if (changeHolder / 1 >= 1){
                     if (vendingMachine.getDenominations().getP1Coin() != 0) // Initial check, skips to next denomination if this one is empty
                     {
                         int quotient = changeHolder / 1; // Variable quotient stores how many of this denomination is needed for the current amount of changeHolder

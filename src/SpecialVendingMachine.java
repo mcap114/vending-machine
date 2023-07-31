@@ -219,6 +219,7 @@ public class SpecialVendingMachine extends VendingMachine{
         if (payment < bundlePrice) {
             System.out.println("Insufficient amount inserted.");
             System.out.println("Returned money: " +payment);
+            validPurchase = false;
         }
 
         // Checks if there is enough money in the machine to dispense change
@@ -226,12 +227,13 @@ public class SpecialVendingMachine extends VendingMachine{
             System.out.println("Not enough money in machine to dispense change.");
             System.out.println("Contact maintenance to replenish money.");
             System.out.println("Returned money: " +payment);
+            validPurchase = false;
         }
 
         int changeHolder = (int) change;
         Denominations denominationsChange = new Denominations();
 
-        if (changeHolder / 1000 > 1){
+        if (changeHolder / 1000 >= 1){
             if (vendingMachine.getDenominations().getP1000Bill() != 0) // Initial check, skips to next denomination if this one is empty
             {
                 int quotient = changeHolder / 1000; // Variable quotient stores how many of this denomination is needed for the current amount of changeHolder
@@ -246,7 +248,7 @@ public class SpecialVendingMachine extends VendingMachine{
             }
         }
 
-        if (changeHolder / 500 > 1){
+        if (changeHolder / 500 >= 1){
             if (vendingMachine.getDenominations().getP500Bill() != 0) // Initial check, skips to next denomination if this one is empty
             {
                 int quotient = changeHolder / 500; // Variable quotient stores how many of this denomination is needed for the current amount of changeHolder
@@ -261,7 +263,7 @@ public class SpecialVendingMachine extends VendingMachine{
             }
         }
 
-        if (changeHolder / 200 > 1){
+        if (changeHolder / 200 >= 1){
             if (vendingMachine.getDenominations().getP200Bill() != 0) // Initial check, skips to next denomination if this one is empty
             {
                 int quotient = changeHolder / 200; // Variable quotient stores how many of this denomination is needed for the current amount of changeHolder
@@ -276,7 +278,7 @@ public class SpecialVendingMachine extends VendingMachine{
             }
         }
 
-        if (changeHolder / 100 > 1){
+        if (changeHolder / 100 >= 1){
             if (vendingMachine.getDenominations().getP100Bill() != 0) // Initial check, skips to next denomination if this one is empty
             {
                 int quotient = changeHolder / 100; // Variable quotient stores how many of this denomination is needed for the current amount of changeHolder
@@ -291,7 +293,7 @@ public class SpecialVendingMachine extends VendingMachine{
             }
         }
 
-        if (changeHolder / 50 > 1){
+        if (changeHolder / 50 >= 1){
             if (vendingMachine.getDenominations().getP50Bill() != 0) // Initial check, skips to next denomination if this one is empty
             {
                 int quotient = changeHolder / 50; // Variable quotient stores how many of this denomination is needed for the current amount of changeHolder
@@ -306,9 +308,8 @@ public class SpecialVendingMachine extends VendingMachine{
             }
         }
 
-        //TODO: IMPLEMENT LOGIC FOR P20 BILLS VS COINS
 
-        if (changeHolder / 20 > 1){
+        if (changeHolder / 20 >= 1){
             if (vendingMachine.getDenominations().getP20Bill() != 0) // Initial check, skips to next denomination if this one is empty
             {
                 int quotient = changeHolder / 20; // Variable quotient stores how many of this denomination is needed for the current amount of changeHolder
@@ -323,7 +324,22 @@ public class SpecialVendingMachine extends VendingMachine{
             }
         }
 
-        if (changeHolder / 10 > 1){
+        if (changeHolder / 20 >= 1){
+            if (vendingMachine.getDenominations().getP20Coin() != 0) // Initial check, skips to next denomination if this one is empty
+            {
+                int quotient = changeHolder / 20; // Variable quotient stores how many of this denomination is needed for the current amount of changeHolder
+                denominationsChange.setP20Coin(quotient);
+                if (denominationsChange.getP20Coin() > vendingMachine.getDenominations().getP20Coin()) // Checks if the vending machine has enough of this denomination stored to dispense amount
+                {
+                    validPurchase = false;
+                } else {
+                    validPurchase = true;
+                    changeHolder = changeHolder - (20 * quotient); //Updates the value of changeHolder to compute for the next denomination
+                }
+            }
+        }
+
+        if (changeHolder / 10 >= 1){
             if (vendingMachine.getDenominations().getP10Coin() != 0) // Initial check, skips to next denomination if this one is empty
             {
                 int quotient = changeHolder / 10; // Variable quotient stores how many of this denomination is needed for the current amount of changeHolder
@@ -338,7 +354,7 @@ public class SpecialVendingMachine extends VendingMachine{
             }
         }
 
-        if (changeHolder / 5 > 1){
+        if (changeHolder / 5 >= 1){
             if (vendingMachine.getDenominations().getP5Coin() != 0) // Initial check, skips to next denomination if this one is empty
             {
                 int quotient = changeHolder / 5; // Variable quotient stores how many of this denomination is needed for the current amount of changeHolder
@@ -353,7 +369,7 @@ public class SpecialVendingMachine extends VendingMachine{
             }
         }
 
-        if (changeHolder / 1 > 1){
+        if (changeHolder / 1 >= 1){
             if (vendingMachine.getDenominations().getP1Coin() != 0) // Initial check, skips to next denomination if this one is empty
             {
                 int quotient = changeHolder / 1; // Variable quotient stores how many of this denomination is needed for the current amount of changeHolder
@@ -371,7 +387,7 @@ public class SpecialVendingMachine extends VendingMachine{
         if (validPurchase == true) {
 
 
-            //TODO: PREPARATION DIALOGUE GOES HERE
+            vendingMachine.preparationDialogue(customOrder);
 
 
             System.out.println("\nPurchase successful!");
@@ -417,6 +433,36 @@ public class SpecialVendingMachine extends VendingMachine{
 
             System.out.println("Total: " +change);
 
+            double totalPrice = vendingMachine.computeTotalPrice(customOrder);
+            int totalCalories = vendingMachine.computeTotalCalories(customOrder);
+
+            Item silog = new Item("Silog meal", totalPrice, totalCalories );
+
+            Transaction transaction = new Transaction();
+            transaction.setItemSold(silog);
+            transaction.setPayment(payment);
+            transaction.setChangeDispensed(change);
+            transaction.setPrice(totalPrice);
+
+            for (Item i : customOrder){
+                for (ItemSlot j: slots){
+                    if (j.getItem() == i){
+                        int index = slots.indexOf(j);
+
+                        // Updates item quantity
+                        vendingMachine.getItemSlots().get(index).setQuantity(vendingMachine.getItemSlots().get(index).getQuantity() - 1);
+
+                        // Updates sales log
+                        vendingMachine.getItemSlots().get(index).setSales(vendingMachine.getItemSlots().get(index).getSales() + 1);
+
+                        // Updates total sales
+                        vendingMachine.setTotalSales(vendingMachine.getTotalSales() + vendingMachine.getItemSlots().get(index).getItem().getPrice());
+                    }
+                }
+            }
+
+            // Adds transaction to list of transactions
+            vendingMachine.getTransactionLog().add(transaction);
 
             // Decreases change dispensed from stored money
             vendingMachine.getDenominations().setP1000Bill(vendingMachine.getDenominations().getP1000Bill() - denominationsChange.getP1000Bill());
@@ -444,9 +490,7 @@ public class SpecialVendingMachine extends VendingMachine{
 
         }
 
-
     }
-
 
     public int computeTotalCalories(ArrayList<Item> items){
         int totalCalories = 0;
@@ -468,27 +512,32 @@ public class SpecialVendingMachine extends VendingMachine{
         return totalPrice;
     }
 
-    /*
+
     public void preparationDialogue(ArrayList<Item> items){
-
+    for (Item i: items){
+        if (i.getName().equals("Egg")){
+            System.out.println("Frying egg..");
+        }
+        else if (i.getName().equals("Tapa")){
+            System.out.println("Cooking tapa..");
+        }
+        else if (i.getName().equals("Tocino")){
+            System.out.println("Cooking tocino..");
+        }
+        else if (i.getName().equals("Longganisa")){
+            System.out.println("Cooking longganisa..");
+        }
+        else if (i.getName().equals("Hotdog")){
+            System.out.println("Cooking hotdog..");
+        }
+        else if (i.getName().equals("Rice")){
+            System.out.println("Frying rice..");
+        }
+    }
+        System.out.println("Putting everything on a plate..");
+        System.out.println("Silog done!");
     }
 
-    public boolean isTapsilog(ArrayList<Item> items){
-
-    }
-
-    public boolean isHotsilog(ArrayList<Item> item){
-
-    }
-
-    public boolean isLongsilog(ArrayList<Item> items){
-
-    }
-
-    public boolean isTapsilog(ArrayList<Item> items){
-
-    }
-    */
 
 }
 
