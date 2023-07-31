@@ -354,126 +354,142 @@ public class VendingMachine {
                 Denominations denominationsChange = new Denominations();
 
                 if (changeHolder / 1000 > 1){
-                    int quotient = changeHolder / 1000;
-                    changeHolder = changeHolder - (1000 * quotient);
-                    denominationsChange.setP1000Bill(quotient);
-                    if (denominationsChange.getP1000Bill() > vendingMachine.getDenominations().getP1000Bill()){
-                        validPurchase = false;
+                    if (vendingMachine.getDenominations().getP1000Bill() != 0) // Initial check, skips to next denomination if this one is empty
+                    {
+                        int quotient = changeHolder / 1000; // Variable quotient stores how many of this denomination is needed for the current amount of changeHolder
+                        denominationsChange.setP1000Bill(quotient);
+                        if (denominationsChange.getP1000Bill() > vendingMachine.getDenominations().getP1000Bill()) // Checks if the vending machine has enough of this denomination stored to dispense amount
+                        {
+                            validPurchase = false;
+                        } else {
+                            validPurchase = true;
+                            changeHolder = changeHolder - (1000 * quotient); //Updates the value of changeHolder to compute for the next denomination
+                        }
                     }
                 }
 
                 if (changeHolder / 500 > 1){
-                    int quotient = changeHolder / 500;
-                    changeHolder = changeHolder - (500 * quotient);
-                    denominationsChange.setP500Bill(quotient);
-                    if (denominationsChange.getP500Bill() > vendingMachine.getDenominations().getP500Bill()){
-                        validPurchase = false;
+                    if (vendingMachine.getDenominations().getP500Bill() != 0) // Initial check, skips to next denomination if this one is empty
+                    {
+                        int quotient = changeHolder / 500; // Variable quotient stores how many of this denomination is needed for the current amount of changeHolder
+                        denominationsChange.setP500Bill(quotient);
+                        if (denominationsChange.getP500Bill() > vendingMachine.getDenominations().getP500Bill()) // Checks if the vending machine has enough of this denomination stored to dispense amount
+                        {
+                            validPurchase = false;
+                        } else {
+                            validPurchase = true;
+                            changeHolder = changeHolder - (500 * quotient); //Updates the value of changeHolder to compute for the next denomination
+                        }
                     }
                 }
 
                 if (changeHolder / 200 > 1){
-                    int quotient = changeHolder / 200;
-                    changeHolder = changeHolder - (200 * quotient);
-                    denominationsChange.setP200Bill(quotient);
-                    if (denominationsChange.getP200Bill() > vendingMachine.getDenominations().getP200Bill()){
-                        validPurchase = false;
+                    if (vendingMachine.getDenominations().getP200Bill() != 0) // Initial check, skips to next denomination if this one is empty
+                    {
+                        int quotient = changeHolder / 200; // Variable quotient stores how many of this denomination is needed for the current amount of changeHolder
+                        denominationsChange.setP200Bill(quotient);
+                        if (denominationsChange.getP200Bill() > vendingMachine.getDenominations().getP200Bill()) // Checks if the vending machine has enough of this denomination stored to dispense amount
+                        {
+                            validPurchase = false;
+                        } else {
+                            validPurchase = true;
+                            changeHolder = changeHolder - (200 * quotient); //Updates the value of changeHolder to compute for the next denomination
+                        }
                     }
                 }
 
                 if (changeHolder / 100 > 1){
-                    int quotient = changeHolder / 100;
-                    changeHolder = changeHolder - (100 * quotient);
-                    denominationsChange.setP100Bill(quotient);
-                    if (denominationsChange.getP100Bill() > vendingMachine.getDenominations().getP100Bill()){
-                        validPurchase = false;
+                    if (vendingMachine.getDenominations().getP100Bill() != 0) // Initial check, skips to next denomination if this one is empty
+                    {
+                        int quotient = changeHolder / 100; // Variable quotient stores how many of this denomination is needed for the current amount of changeHolder
+                        denominationsChange.setP100Bill(quotient);
+                        if (denominationsChange.getP100Bill() > vendingMachine.getDenominations().getP100Bill()) // Checks if the vending machine has enough of this denomination stored to dispense amount
+                        {
+                            validPurchase = false;
+                        } else {
+                            validPurchase = true;
+                            changeHolder = changeHolder - (100 * quotient); //Updates the value of changeHolder to compute for the next denomination
+                        }
                     }
                 }
 
                 if (changeHolder / 50 > 1){
-                    int quotient = changeHolder / 50;
-                    changeHolder = changeHolder - (50 * quotient);
-                    denominationsChange.setP50Bill(quotient);
-                    if (denominationsChange.getP50Bill() > vendingMachine.getDenominations().getP50Bill()){
-                        validPurchase = false;
+                    if (vendingMachine.getDenominations().getP50Bill() != 0) // Initial check, skips to next denomination if this one is empty
+                    {
+                        int quotient = changeHolder / 50; // Variable quotient stores how many of this denomination is needed for the current amount of changeHolder
+                        denominationsChange.setP50Bill(quotient);
+                        if (denominationsChange.getP50Bill() > vendingMachine.getDenominations().getP50Bill()) // Checks if the vending machine has enough of this denomination stored to dispense amount
+                        {
+                            validPurchase = false;
+                        } else {
+                            validPurchase = true;
+                            changeHolder = changeHolder - (50 * quotient); //Updates the value of changeHolder to compute for the next denomination
+                        }
                     }
                 }
 
                 //TODO: IMPLEMENT LOGIC FOR P20 BILLS VS COINS
 
                 if (changeHolder / 20 > 1){
-                    int quotient = changeHolder / 20;
-                    changeHolder = changeHolder - (20 * quotient);
-                    denominationsChange.setP20Bill(quotient);
-                    if (denominationsChange.getP20Bill() > vendingMachine.getDenominations().getP20Bill()){
-                        validPurchase = false;
+                    if (vendingMachine.getDenominations().getP20Bill() != 0) // Initial check, skips to next denomination if this one is empty
+                    {
+                        int quotient = changeHolder / 20; // Variable quotient stores how many of this denomination is needed for the current amount of changeHolder
+                        denominationsChange.setP20Bill(quotient);
+                        if (denominationsChange.getP20Bill() > vendingMachine.getDenominations().getP20Bill()) // Checks if the vending machine has enough of this denomination stored to dispense amount
+                        {
+                            validPurchase = false;
+                        } else {
+                            validPurchase = true;
+                            changeHolder = changeHolder - (20 * quotient); //Updates the value of changeHolder to compute for the next denomination
+                        }
                     }
                 }
 
                 if (changeHolder / 10 > 1){
-                    int quotient = changeHolder / 10;
-                    changeHolder = changeHolder - (10 * quotient);
-                    denominationsChange.setP10Coin(quotient);
-                    if (denominationsChange.getP10Coin() > vendingMachine.getDenominations().getP10Coin()){
-                        validPurchase = false;
+                    if (vendingMachine.getDenominations().getP10Coin() != 0) // Initial check, skips to next denomination if this one is empty
+                    {
+                        int quotient = changeHolder / 10; // Variable quotient stores how many of this denomination is needed for the current amount of changeHolder
+                        denominationsChange.setP10Coin(quotient);
+                        if (denominationsChange.getP10Coin() > vendingMachine.getDenominations().getP10Coin()) // Checks if the vending machine has enough of this denomination stored to dispense amount
+                        {
+                            validPurchase = false;
+                        } else {
+                            validPurchase = true;
+                            changeHolder = changeHolder - (10 * quotient); //Updates the value of changeHolder to compute for the next denomination
+                        }
                     }
                 }
 
                 if (changeHolder / 5 > 1){
-                    int quotient = changeHolder / 5;
-                    changeHolder = changeHolder - (5 * quotient);
-                    denominationsChange.setP5Coin(quotient);
-                    if (denominationsChange.getP5Coin() > vendingMachine.getDenominations().getP5Coin()){
-                        validPurchase = false;
+                    if (vendingMachine.getDenominations().getP5Coin() != 0) // Initial check, skips to next denomination if this one is empty
+                    {
+                        int quotient = changeHolder / 5; // Variable quotient stores how many of this denomination is needed for the current amount of changeHolder
+                        denominationsChange.setP5Coin(quotient);
+                        if (denominationsChange.getP5Coin() > vendingMachine.getDenominations().getP5Coin()) // Checks if the vending machine has enough of this denomination stored to dispense amount
+                        {
+                            validPurchase = false;
+                        } else {
+                            validPurchase = true;
+                            changeHolder = changeHolder - (5 * quotient); //Updates the value of changeHolder to compute for the next denomination
+                        }
                     }
                 }
 
                 if (changeHolder / 1 > 1){
-                    int quotient = changeHolder / 1;
-                    changeHolder = changeHolder - (1 * quotient);
-                    denominationsChange.setP1Coin(quotient);
-                    if (denominationsChange.getP1Coin() > vendingMachine.getDenominations().getP1Coin()){
-                        validPurchase = false;
+                    if (vendingMachine.getDenominations().getP1Coin() != 0) // Initial check, skips to next denomination if this one is empty
+                    {
+                        int quotient = changeHolder / 1; // Variable quotient stores how many of this denomination is needed for the current amount of changeHolder
+                        denominationsChange.setP1Coin(quotient);
+                        if (denominationsChange.getP5Coin() > vendingMachine.getDenominations().getP1Coin()) // Checks if the vending machine has enough of this denomination stored to dispense amount
+                        {
+                            validPurchase = false;
+                        } else {
+                            validPurchase = true;
+                            changeHolder = changeHolder - (1 * quotient); //Updates the value of changeHolder to compute for the next denomination
+                        }
                     }
                 }
 
-                // Checks if the machine has enough denominations stored to dispense change
-                /*
-                if (denominationsChange.getP1000Bill() > vendingMachine.getDenominations().getP1000Bill()){
-                    validPurchase = false;
-                }
-
-                if (denominationsChange.getP500Bill() > vendingMachine.getDenominations().getP500Bill()){
-                    validPurchase = false;
-                }
-
-                if (denominationsChange.getP200Bill() > vendingMachine.getDenominations().getP200Bill()){
-                    validPurchase = false;
-                }
-
-                if (denominationsChange.getP100Bill() > vendingMachine.getDenominations().getP100Bill()){
-                    validPurchase = false;
-                }
-
-                if (denominationsChange.getP50Bill() > vendingMachine.getDenominations().getP50Bill()){
-                    validPurchase = false;
-                }
-
-                if (denominationsChange.getP20Bill() > vendingMachine.getDenominations().getP20Bill()){
-                    validPurchase = false;
-                }
-
-                if (denominationsChange.getP20Coin() > vendingMachine.getDenominations().getP20Coin()){
-                    validPurchase = false;
-                }
-
-                if (denominationsChange.getP10Coin() > vendingMachine.getDenominations().getP10Coin()){
-                    validPurchase = false;
-                }
-
-                if (denominationsChange.getP1Coin() > vendingMachine.getDenominations().getP1Coin()){
-                    validPurchase = false;
-                }
-*/
 
 
                 if (validPurchase == true) {
@@ -631,7 +647,7 @@ public class VendingMachine {
                 i.setQuantity(restockAmount);
             }
 
-            }
+        }
         if (found == false){
             System.out.println("Item not found.");
         }
@@ -838,22 +854,22 @@ public class VendingMachine {
             }
 
         } while (exit == false);
-        }
+    }
 
     /**
      *
      *
-      */
-public void displayTotalSales(VendingMachine vendingMachine){
-    ArrayList<ItemSlot> slots = vendingMachine.getItemSlots();
+     */
+    public void displayTotalSales(VendingMachine vendingMachine){
+        ArrayList<ItemSlot> slots = vendingMachine.getItemSlots();
 
-    System.out.println("=========TOTAL SALES==========");
-    System.out.println("ITEM NAME       UNITS SOLD      TOTAL SALES");
-    for (ItemSlot i : slots){
-        System.out.println(i.getItem().getName() + "                "+ i.getSales() +"              P"+ (i.getSales() * i.getItem().getPrice()));
+        System.out.println("=========TOTAL SALES==========");
+        System.out.println("ITEM NAME       UNITS SOLD      TOTAL SALES");
+        for (ItemSlot i : slots){
+            System.out.println(i.getItem().getName() + "                "+ i.getSales() +"              P"+ (i.getSales() * i.getItem().getPrice()));
+        }
+        System.out.println("\nTotal of all items: P" + vendingMachine.getTotalSales());
     }
-    System.out.println("\nTotal of all items: P" + vendingMachine.getTotalSales());
-}
 
 
     /**
