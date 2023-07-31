@@ -182,8 +182,8 @@ public class Main {
                             }
                         }
                         case 4 -> {
+                            exit = true;
                             exitAll = true;
-                            sc.close();
                             System.out.println("\nExiting program..");
                         }
                     }
@@ -357,8 +357,8 @@ public class Main {
                             }
                         }
                         case 4 -> {
+                            exit = true;
                             exitAll = true;
-                            sc.close();
                             System.out.println("\nExiting program..");
                         }
                     }
@@ -367,5 +367,6 @@ public class Main {
                 } while (!exit);
             }
         } while (!exitAll);
+        sc.close();
         }
     }

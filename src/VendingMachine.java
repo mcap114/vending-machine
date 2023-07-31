@@ -546,7 +546,7 @@ public class VendingMachine {
                     // Updates total sales
                     vendingMachine.setTotalSales(vendingMachine.getTotalSales() + vendingMachine.getItemSlots().get(index).getItem().getPrice());
 
-                    // Updates denominations
+                    // Decreases change dispensed from stored money
                     vendingMachine.getDenominations().setP1000Bill(vendingMachine.getDenominations().getP1000Bill() - denominationsChange.getP1000Bill());
                     vendingMachine.getDenominations().setP500Bill(vendingMachine.getDenominations().getP500Bill() - denominationsChange.getP500Bill());
                     vendingMachine.getDenominations().setP200Bill(vendingMachine.getDenominations().getP200Bill() - denominationsChange.getP200Bill());
@@ -557,6 +557,18 @@ public class VendingMachine {
                     vendingMachine.getDenominations().setP10Coin(vendingMachine.getDenominations().getP10Coin() - denominationsChange.getP10Coin());
                     vendingMachine.getDenominations().setP5Coin(vendingMachine.getDenominations().getP5Coin() - denominationsChange.getP5Coin());
                     vendingMachine.getDenominations().setP1Coin(vendingMachine.getDenominations().getP1Coin() - denominationsChange.getP1Coin());
+
+                    // Adds payment to denominations
+                    vendingMachine.getDenominations().setP1000Bill(vendingMachine.getDenominations().getP1000Bill() + paymentDenominations.getP1000Bill());
+                    vendingMachine.getDenominations().setP500Bill(vendingMachine.getDenominations().getP500Bill() + paymentDenominations.getP500Bill());
+                    vendingMachine.getDenominations().setP200Bill(vendingMachine.getDenominations().getP200Bill() + paymentDenominations.getP200Bill());
+                    vendingMachine.getDenominations().setP100Bill(vendingMachine.getDenominations().getP100Bill() + paymentDenominations.getP100Bill());
+                    vendingMachine.getDenominations().setP50Bill(vendingMachine.getDenominations().getP50Bill() + paymentDenominations.getP50Bill());
+                    vendingMachine.getDenominations().setP20Bill(vendingMachine.getDenominations().getP20Bill() + paymentDenominations.getP20Bill());
+                    vendingMachine.getDenominations().setP20Coin(vendingMachine.getDenominations().getP20Coin() + paymentDenominations.getP20Coin());
+                    vendingMachine.getDenominations().setP10Coin(vendingMachine.getDenominations().getP10Coin() + paymentDenominations.getP10Coin());
+                    vendingMachine.getDenominations().setP5Coin(vendingMachine.getDenominations().getP5Coin() + paymentDenominations.getP5Coin());
+                    vendingMachine.getDenominations().setP1Coin(vendingMachine.getDenominations().getP1Coin() + paymentDenominations.getP1Coin());
                 }
             }
 
