@@ -414,7 +414,6 @@ public class VendingMachine {
                     }
                 }
 
-
                 if (changeHolder / 20 >= 1){
                     if (vendingMachine.getDenominations().getP20Bill() != 0) // Initial check, skips to next denomination if this one is empty
                     {
@@ -489,8 +488,6 @@ public class VendingMachine {
                         }
                     }
                 }
-
-
 
                 if (validPurchase == true) {
                     System.out.println("\nPurchase successful!");

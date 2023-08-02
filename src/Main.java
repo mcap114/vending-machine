@@ -9,16 +9,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        JFrame frame = new JFrame();
-        frame.setTitle("Capasilog");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setResizable(false);
-        frame.setSize(500, 500);
-        frame.setVisible(true);
-
-        ImageIcon eggboy = new ImageIcon("src/eggboy.jpg");
-        frame.setIconImage(eggboy.getImage());
-        frame.getContentPane().setBackground(new Color(231, 226, 210));
 
         int slots;
         boolean exitAll = false;
