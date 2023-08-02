@@ -7,6 +7,9 @@ import java.util.Scanner;
  * Serves as a driver class for the vending machine factory.
  */
 public class Main {
+    /**
+     * Main method that facilitates program flow.
+     */
     public static void main(String[] args) {
 
 

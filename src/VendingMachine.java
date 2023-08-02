@@ -4,7 +4,7 @@ import java.util.Scanner;
 import static java.lang.Math.abs;
 
 /**
- * Represents a vending machine.
+ * Represents a regular vending machine.
  * Contains objects of Item, ItemSlot, Denominations, and Transaction classes and corresponding
  * methods to simulate vending features.
  *
@@ -711,7 +711,7 @@ public class VendingMachine {
 
     /**
      * Replenishes the denominations inside the vending machine based on user input
-     * @param vendingMachine
+     * @param vendingMachine - the currently active VendingMachine object
      */
     public void replenishMoney(VendingMachine vendingMachine){
         Denominations denominations = vendingMachine.getDenominations();
@@ -866,8 +866,9 @@ public class VendingMachine {
     }
 
     /**
+     * Displays the total sales of every item sold in the vending machine.
      *
-     *
+     * @param vendingMachine - the currently active VendingMachine object
      */
     public void displayTotalSales(VendingMachine vendingMachine){
         ArrayList<ItemSlot> slots = vendingMachine.getItemSlots();
@@ -896,6 +897,11 @@ public class VendingMachine {
         }
     }
 
+    /**
+     * Displays the amount of each denomination currently stored in the vending machine.
+     *
+     * @param vendingMachine The VendingMachine object containing the denominations object to be displayed.
+     */
     public void displayDenominations(VendingMachine vendingMachine) {
         Denominations denominations = vendingMachine.getDenominations();
 

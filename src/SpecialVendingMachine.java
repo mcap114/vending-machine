@@ -3,13 +3,30 @@ import java.util.Scanner;
 
 import static java.lang.Math.abs;
 
+/**
+ * Represents a special vending machine.
+ * Contains objects of Item, ItemSlot, Denominations, and Transaction classes and corresponding
+ * methods to simulate vending features.
+ *
+ * Adds the ability to create custom items made from individual items.
+ *
+ */
 public class SpecialVendingMachine extends VendingMachine{
 
+    /**
 
+     Constructs a SpecialVendingMachine object with the specified number of slots.
+     @param slots the number of slots available in the vending machine
+     */
     public SpecialVendingMachine(int slots){
         super(slots);
     }
 
+    /**
+     * Allows the user to create custom items composed of several different individual items from the vending machine.
+     *
+     * @param vendingMachine - the currently active special vending machine object
+     */
     public void customizeOrder(SpecialVendingMachine vendingMachine) {
 
         double payment;
@@ -492,6 +509,12 @@ public class SpecialVendingMachine extends VendingMachine{
 
     }
 
+    /**
+     * Computes the total calories of the currently selected items
+     *
+     * @param items - the ArrayList containing the selected items
+     * @return totalCalories - the total number of calories of all the items in the given ArrayList
+     */
     public int computeTotalCalories(ArrayList<Item> items){
         int totalCalories = 0;
 
@@ -502,6 +525,12 @@ public class SpecialVendingMachine extends VendingMachine{
         return totalCalories;
     }
 
+    /**
+     * Computes the total price of the currently selected items
+     *
+     * @param items - the ArrayList containing the selected items
+     * @return totalPrice - the total price of all items in the given ArrayList
+     */
     public double computeTotalPrice(ArrayList<Item> items){
         double totalPrice = 0;
 
@@ -512,7 +541,11 @@ public class SpecialVendingMachine extends VendingMachine{
         return totalPrice;
     }
 
-
+    /**
+     * Displays preparation dialogue of the items currently in the ArrayList
+     *
+     * @param items - the ArrayList containing the selected items
+     */
     public void preparationDialogue(ArrayList<Item> items){
     for (Item i: items){
         if (i.getName().equals("Egg")){
