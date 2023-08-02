@@ -17,7 +17,7 @@ public class Main {
             boolean exit = false;
             if (!specialActive) {
                 do {
-                    System.out.println("\nVENDING MACHINE FACTORY");
+                    System.out.println("\nCAPASILOG VENDING MACHINE FACTORY");
                     System.out.println("1. CREATE REGULAR VENDING MACHINE");
                     System.out.println("2. CREATE SPECIAL VENDING MACHINE");
                     System.out.println("3. TEST VENDING MACHINE FEATURES");
@@ -194,7 +194,7 @@ public class Main {
 
             if (specialActive) {
                 do {
-                    System.out.println("\nVENDING MACHINE FACTORY");
+                    System.out.println("\nCAPASILOG VENDING MACHINE FACTORY");
                     System.out.println("1. CREATE REGULAR VENDING MACHINE");
                     System.out.println("2. CREATE SPECIAL VENDING MACHINE");
                     System.out.println("3. TEST VENDING MACHINE FEATURES");
@@ -270,7 +270,6 @@ public class Main {
                                                 break;
                                             //CREATE CUSTOM ORDER FROM SOLD ITEMS
                                             case 3:
-                                                System.out.println("ahaha goods nagana pre");
                                                 vendingMachineSC.customizeOrder(vendingMachineSC);
                                                 break;
                                             //TODO: IMPLEMENT SPECIAL VENDING MACHINE PURCHASE ITEM

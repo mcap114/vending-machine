@@ -315,8 +315,6 @@ public class VendingMachine {
                 found = true;
                 boolean validPurchase = true;
                 double change = abs(i.getItem().getPrice() - payment);
-                System.out.println("change value" +change);
-                System.out.println("total:" +vendingMachine.moneyInMachine);
 
                 // Checks if inserted payment is enough
                 if (payment < i.getItem().getPrice()) {
